@@ -74,5 +74,42 @@ namespace FTN.Common
 		p=10
     }
 
-	//dodati i unitsymbol
+
+	public enum UnitSymbol: short
+    {
+		A=0,
+		F=1,
+		H=2,
+		Hz=3,
+		J=4,
+		N=5,
+		Pa=6,
+		S=7,
+		V=8,
+		VA=9,
+		VAh=10,
+		VAr=11,
+		VArh=12,
+		W=13,
+		Wh=14,
+		deg=15,
+		degC=16,
+		g=17,
+		h=18,
+		m=19,
+		m2=20,
+		m3=21,
+		min=22,
+		none=23,
+		ohm=24,
+		rad=25,
+		s=26
+    }
+	public enum CurveStyle : short
+	{
+		ConstantYValue = 0,
+		Formula = 1,
+		RampYValue = 2,
+		StraightLineYValues = 3
+	}
 }
