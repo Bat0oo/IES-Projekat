@@ -1,20 +1,23 @@
 ﻿using FTN.Common;
+using FTN.Services.NetworkModelService.DataModel.Core;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
 
-namespace FTN.Services.NetworkModelService.DataModel.Core
+namespace FTN.Services.NetworkModelService.DataModel.Wires
 {
-    public class Equipment : PowerSystemResource
+    public class GroundDisconnector : Switch
     {
-
-        public Equipment(long globalId) : base(globalId)
+        public GroundDisconnector(long globalId) : base(globalId)
         {
         }
-
 
         public override bool Equals(object obj)
         {
             if (base.Equals(obj))
             {
-                Equipment x = (Equipment)obj;
+                GroundDisconnector x = (GroundDisconnector)obj;
                 return true;
             }
             else
@@ -27,9 +30,6 @@ namespace FTN.Services.NetworkModelService.DataModel.Core
         {
             return base.GetHashCode();
         }
-
-        #region IAccess implementation
-
         public override bool HasProperty(ModelCode property)
         {
             return base.HasProperty(property);
@@ -37,16 +37,12 @@ namespace FTN.Services.NetworkModelService.DataModel.Core
 
         public override void GetProperty(Property property)
         {
-
             base.GetProperty(property);
         }
 
         public override void SetProperty(Property property)
         {
             base.SetProperty(property);
-
         }
-
-        #endregion IAccess implementation
     }
 }

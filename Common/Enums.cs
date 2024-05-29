@@ -2,6 +2,7 @@
 
 namespace FTN.Common
 {	
+	/*
 	public enum PhaseCode : short
 	{
 		Unknown = 0x0,
@@ -52,8 +53,9 @@ namespace FTN.Common
 		Secondary = 2,
 		Tertiary = 3
 	}		
+	*/
 	
-	//added
+	
 	public enum SwitchState: short
     {
 		Close=0,
@@ -107,9 +109,9 @@ namespace FTN.Common
     }
 	public enum CurveStyle : short
 	{
-		ConstantYValue = 0,
-		Formula = 1,
-		RampYValue = 2,
-		StraightLineYValues = 3
+        constantYValue = 0,
+        formula = 1,
+        rampYValue = 2,
+        straightLineYValues = 3
 	}
 }

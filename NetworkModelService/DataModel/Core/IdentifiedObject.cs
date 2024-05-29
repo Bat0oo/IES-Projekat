@@ -39,10 +39,13 @@ namespace FTN.Services.NetworkModelService.DataModel.Core
 		/// </summary>		
 		private string mrid = string.Empty;
 
-		/// <summary>
-		/// Description of identified object
-		/// </summary>		
-		private string description = string.Empty;
+        private string aliasname = string.Empty;
+
+
+        /// <summary>
+        /// Description of identified object
+        /// </summary>		
+       
 		
 		/// <summary>
 		/// Initializes a new instance of the IdentifiedObject class.
@@ -93,15 +96,16 @@ namespace FTN.Services.NetworkModelService.DataModel.Core
 			get { return mrid; }
 			set { mrid = value; }
 		}
+		public string AliasName
+		{
+			get { return aliasname; }
+			set { aliasname = value; }
+		}
 
 		/// <summary>
 		/// Gets or sets description of the entity (identified object).
 		/// </summary>			
-		public string Description
-		{
-			get { return description; }
-			set { description = value; }
-		}		
+		
 
 		public static bool operator ==(IdentifiedObject x, IdentifiedObject y)
 		{
@@ -134,7 +138,7 @@ namespace FTN.Services.NetworkModelService.DataModel.Core
 			{
 				IdentifiedObject io = (IdentifiedObject)x;
 				return ((io.GlobalId == this.GlobalId) && (io.name == this.name) && (io.mrid == this.mrid) &&
-						(io.description == this.description));
+						(io.aliasname == this.aliasname));
 			}
 		}
 		
@@ -151,8 +155,8 @@ namespace FTN.Services.NetworkModelService.DataModel.Core
 			{
 				case ModelCode.IDOBJ_GID:				
 				case ModelCode.IDOBJ_NAME:
-				case ModelCode.IDOBJ_DESCRIPTION:
 				case ModelCode.IDOBJ_MRID:
+				case ModelCode.IDOBJ_ALLASNAME:
 					return true;
 
 				default:				
@@ -176,8 +180,8 @@ namespace FTN.Services.NetworkModelService.DataModel.Core
 					property.SetValue(mrid);
 					break;
 
-                case ModelCode.IDOBJ_DESCRIPTION:
-                    property.SetValue(description);
+                case ModelCode.IDOBJ_ALLASNAME:
+                    property.SetValue(aliasname);
                     break;
 			
 				default:
@@ -189,26 +193,30 @@ namespace FTN.Services.NetworkModelService.DataModel.Core
 
 		public virtual void SetProperty(Property property)
 		{
-			switch(property.Id)
-			{
-				case ModelCode.IDOBJ_NAME:
-					name = property.AsString();					
-					break;
+            switch (property.Id)
+            {
+                case ModelCode.IDOBJ_GID:
+                    property.SetValue(globalId);
+                    break;
 
-				case ModelCode.IDOBJ_DESCRIPTION:
-					description = property.AsString();					
-					break;
+                case ModelCode.IDOBJ_NAME:
+                    property.SetValue(name);
+                    break;
 
-				case ModelCode.IDOBJ_MRID:					
-					mrid = property.AsString();
-					break;				
+                case ModelCode.IDOBJ_MRID:
+                    property.SetValue(mrid);
+                    break;
 
-				default:					
-					string message = string.Format("Unknown property id = {0} for entity (GID = 0x{1:x16}).", property.Id.ToString(), this.GlobalId);
-					CommonTrace.WriteTrace(CommonTrace.TraceError, message);
-					throw new Exception(message);					
-			}
-		}
+                case ModelCode.IDOBJ_ALLASNAME:
+                    property.SetValue(aliasname);
+                    break;
+
+                default:
+                    string message = string.Format("Unknown property id = {0} for entity (GID = 0x{1:x16}).", property.Id.ToString(), this.GlobalId);
+                    CommonTrace.WriteTrace(CommonTrace.TraceError, message);
+                    throw new Exception(message);
+            }
+        }
 
 		#endregion IAccess implementation
 
